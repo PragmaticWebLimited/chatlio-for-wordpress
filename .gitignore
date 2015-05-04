@@ -52,6 +52,8 @@ wp-content/mysql.sql
 /wp-content/index.php
 /wp-content/themes/twenty*
 /wp-content/themes/index.php
+/wp-content/languages
+/wp-content/languages/*
 
 # Pragmatic specific
 .htaccess
@@ -67,8 +69,10 @@ wp-rss2.php
 /wp
 wp-config*
 
-# {Project} specific
-!/wp-content/themes/child-theme
+# Chatlio specific
+/wp-content/themes*
+!/wp-content/plugins/chatlio
+!/wp-content/plugins/chatlio/*
 
 # large/disallowed file types
 # a CDN should be used for these
