@@ -36,24 +36,38 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 
 if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
-	
-	include_once( 'github-updater.php' );
-	
-	$config = array(
-		'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-		'proper_folder_name' => 'chatlio', // this is the name of the folder your plugin lives in
-		'api_url' => 'https://api.github.com/repos/jamesmorrison/chatlio-for-wordpress', // the github API url of your github repo
-		'raw_url' => 'https://raw.github.com/amesmorrison/chatlio-for-wordpress/master', // the github raw url of your github repo
-		'github_url' => 'https://github.com/amesmorrison/chatlio-for-wordpress', // the github url of your github repo
-		'zip_url' => 'https://github.com/amesmorrison/chatlio-for-wordpress/zipball/master', // the zip url of the github repo
-		'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
-		'requires' => '3.7', // which version of WordPress does your plugin require?
-		'tested' => '3.7.1', // which version of WordPress is your plugin tested up to?
-		'readme' => 'README.md', // which file to use as the readme for the version number
-		'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
-	);
-	
-	new WP_GitHub_Updater( $config );
+
+	if ( file_exists( plugin_dir_path( __FILE__ ) . '/github-updater.php' ) ) {
+
+		include_once( plugin_dir_path( __FILE__ ) . '/github-updater.php' );
+		
+		if ( class_exists( 'WP_GitHub_Updater' ) ) {
+			
+			new WP_GitHub_Updater( array(
+				'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
+				'proper_folder_name' => 'chatlio', // this is the name of the folder your plugin lives in
+				'api_url' => 'https://api.github.com/repos/PragmaticWebLimited/chatlio-for-wordpress', // the github API url of your github repo
+				'raw_url' => 'https://raw.github.com/PragmaticWebLimited/chatlio-for-wordpress/master', // the github raw url of your github repo
+				'github_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress', // the github url of your github repo
+				'zip_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress/zipball/master', // the zip url of the github repo
+				'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
+				'requires' => '4.2', // which version of WordPress does your plugin require?
+				'tested' => '4.2.2', // which version of WordPress is your plugin tested up to?
+				'readme' => 'README.md', // which file to use as the readme for the version number
+				'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
+			) );
+
+		} else {
+		
+			error_log( 'CHATLIO ERROR: The "WP_GitHub_Updater" class could not be loaded. Auto updates are not working...' );	
+			
+		}
+		
+	} else {
+
+		error_log( 'CHATLIO ERROR: The "github-updater.php" file could not be loaded. Auto updates are not working...' );
+
+	}
 
 }
 
@@ -137,6 +151,8 @@ class Chatlio {
 	    
 	    if ( isset ( $this->options['widget_id'] ) ) {
 		    
+		    $this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
+		    
 		    echo '<script type="text/javascript">
 					var _chatlio=_chatlio||[];
 					!function(){
@@ -155,7 +171,7 @@ class Chatlio {
 	/**
 	 * Admin init Callback
 	 *
-	 * @since 2.0
+	 * @since 1.0
 	 */
     function admin_init() {
 
@@ -169,7 +185,7 @@ class Chatlio {
 	/**
 	 * Admin Menu Callback
 	 *
-	 * @since 2.0
+	 * @since 1.0
 	 */
     function admin_menu() {
 		// Add settings page on Tools
@@ -179,7 +195,7 @@ class Chatlio {
 	/**
 	 * Register Admin Settings
 	 *
-	 * @since 2.0
+	 * @since 1.0
 	 */
     function register_settings() {
 	    register_setting( 'chatlio', 'chatlio_options', array( $this, 'chatlio_sanitize' ) );
@@ -192,7 +208,7 @@ class Chatlio {
 	}
 
 	/**
-	 * UI Labs Experiments Callback
+	 * Settings Callback
 	 *
 	 * @since 2.0
 	 */
@@ -205,7 +221,7 @@ class Chatlio {
 	}
 
 	/**
-	 * Colour-Coded Post Statuses Callback
+	 * Widget ID Statuses Callback
 	 *
 	 * @since 2.0
 	 */
@@ -244,7 +260,7 @@ class Chatlio {
 	 * Options sanitization and validation
 	 *
 	 * @param $input the input to be sanitized
-	 * @since 2.0
+	 * @since 1.0
 	 */
 	function chatlio_sanitize( $input ) {
     	$options = $this->options;
@@ -262,7 +278,7 @@ class Chatlio {
 	/**
 	 * Add settings link on plugin
 	 *
-	 * @since 2.0
+	 * @since 1.0
 	 */
 	function add_settings_link( $links, $file ) {
 		if ( plugin_basename( __FILE__ ) == $file ) {
@@ -275,8 +291,3 @@ class Chatlio {
 }
 
 new Chatlio();
-
-
-
-
-
