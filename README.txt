@@ -10,7 +10,7 @@ Chatlio lets you talk with your customers using Slack directly from your WordPre
 
 == Description ==
 
-Chatlio is a live chat solution for Slack teams. Visitors to your site see a chat box on their screen and messages are delivered directly to your Slack account. You get all the awesome Slack tools to manage chats and channels along with the immediacy of a live chat, all for the benefit of better customer comunication.
+Chatlio is a live chat solution for Slack teams. Visitors to your site see a chat box on their screen and messages are delivered directly to your Slack account. You get all the awesome Slack tools to manage chats and channels along with the immediacy of a live chat, all for the benefit of better customer communication.
 Each conversation takes place in a dedicated channel and Chatlio will provide you with lots of extra information about the visitor, e.g. email, current plan and where they are chatting from in the world.
 
 For more details, visit https://chatlio.com and talk to us!
