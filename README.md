@@ -1,5 +1,5 @@
 === Chatlio for WordPress ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: jamesmorrison
 Tags: livechat, chatlio
 Requires at least: 4.2
 Tested up to: 4.2.2
@@ -19,9 +19,8 @@ For more details, visit https://chatlio.com and talk to us!
 These instructions assume you have already signed up for Chatlio and have gone through the setup here https://chatlio.com/app/#/signup
 
 1. Upload `chatlio.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Add your widget ID through the 'Tools > Chatlio' menu in WordPress
-1. Place `<?php do_action('chatlio'); ?>` in your templates
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Add your widget ID through the 'Tools > Chatlio' menu in WordPress
 
 == Screenshots ==
 1. Chatlio WordPress settings - setup with your widget ID

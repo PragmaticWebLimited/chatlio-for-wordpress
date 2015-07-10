@@ -4,7 +4,7 @@
  *	Plugin Name: Chatlio for WordPress
  *	Plugin URI: http://chatlio.pragmatic-web.co.uk/
  *	Description: Chatlio plugin for WordPress
- *	Version: 0.0.1
+ *	Version: 1.0
  *	Author: James Morrison / Pragmatic Web
  *	Author URI: https://www.pragmatic-web.co.uk/
  **/
@@ -15,27 +15,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
-/* REFERENCE SCRIPT
-<script type="text/javascript">
-  var _chatlio=_chatlio||[];
- !function(){
-    var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
-    for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
-    var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];
-    n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","47594043-c2f9-43a6-698d-a080a019870e"),n.setAttribute("data-embed-version","1.2"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
-  }();
-</script>
-*/
-
-
 /**
  * Github Updater
  *
  * @since 1.0
  */
 
-if ( is_admin() ) { // note the use of is_admin() to double check that this is happening in the admin
+if ( is_admin() ) {
 
 	if ( file_exists( plugin_dir_path( __FILE__ ) . '/github-updater.php' ) ) {
 
@@ -44,17 +30,17 @@ if ( is_admin() ) { // note the use of is_admin() to double check that this is h
 		if ( class_exists( 'WP_GitHub_Updater' ) ) {
 			
 			new WP_GitHub_Updater( array(
-				'slug' => plugin_basename(__FILE__), // this is the slug of your plugin
-				'proper_folder_name' => 'chatlio-for-wordpress', // this is the name of the folder your plugin lives in
-				'api_url' => 'https://api.github.com/repos/PragmaticWebLimited/chatlio-for-wordpress', // the github API url of your github repo
-				'raw_url' => 'https://raw.github.com/PragmaticWebLimited/chatlio-for-wordpress/master', // the github raw url of your github repo
-				'github_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress', // the github url of your github repo
-				'zip_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress/archive/master.zip', // the zip url of the github repo
-				'sslverify' => true, // wether WP should check the validity of the SSL cert when getting an update, see https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/2 and https://github.com/jkudish/WordPress-GitHub-Plugin-Updater/issues/4 for details
-				'requires' => '4.2', // which version of WordPress does your plugin require?
-				'tested' => '4.2.2', // which version of WordPress is your plugin tested up to?
-				'readme' => 'README.md', // which file to use as the readme for the version number
-				'access_token' => '', // Access private repositories by authorizing under Appearance > Github Updates when this example plugin is installed
+				'slug' => plugin_basename(__FILE__),
+				'proper_folder_name' => 'chatlio-for-wordpress',
+				'api_url' => 'https://api.github.com/repos/PragmaticWebLimited/chatlio-for-wordpress',
+				'raw_url' => 'https://raw.github.com/PragmaticWebLimited/chatlio-for-wordpress/master',
+				'github_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress',
+				'zip_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress/archive/master.zip',
+				'sslverify' => true,
+				'requires' => '4.2',
+				'tested' => '4.2.2',
+				'readme' => 'version.md', // where the current version is stored. must be updated when a new release is tagged
+				'access_token' => '',
 			) );
 
 		} else {
