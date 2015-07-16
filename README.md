@@ -31,6 +31,10 @@ These instructions assume you have already signed up for Chatlio and have gone t
 
 ## Changelog
 
+### 1.0.1
+
+Corrected minor issues in README.md document
+
 ### 1.0
 
 Initial release
