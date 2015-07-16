@@ -20,7 +20,7 @@ For more details, visit https://chatlio.com and talk to us!
 
 These instructions assume you have already signed up for Chatlio and have gone through the setup here https://chatlio.com/app/#/signup
 
-1. Upload `chatlio.php` to the `/wp-content/plugins/` directory
+1. Upload the `chatlio-for-wordpress` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Add your widget ID through the 'Tools > Chatlio' menu in WordPress
 
