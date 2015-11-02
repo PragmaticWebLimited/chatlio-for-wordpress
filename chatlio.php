@@ -1,5 +1,5 @@
 <?php
-	
+
 /**
  *	Plugin Name: Chatlio for WordPress
  *	Plugin URI: http://chatlio.pragmatic-web.co.uk/
@@ -26,9 +26,9 @@ if ( is_admin() ) {
 	if ( file_exists( plugin_dir_path( __FILE__ ) . '/github-updater.php' ) ) {
 
 		include_once( plugin_dir_path( __FILE__ ) . '/github-updater.php' );
-		
+
 		if ( class_exists( 'WP_GitHub_Updater' ) ) {
-			
+
 			new WP_GitHub_Updater( array(
 				'slug' => plugin_basename(__FILE__),
 				'proper_folder_name' => 'chatlio-for-wordpress',
@@ -44,11 +44,11 @@ if ( is_admin() ) {
 			) );
 
 		} else {
-		
-			error_log( 'CHATLIO ERROR: The "WP_GitHub_Updater" class could not be loaded. Auto updates are not working...' );	
-			
+
+			error_log( 'CHATLIO ERROR: The "WP_GitHub_Updater" class could not be loaded. Auto updates are not working...' );
+
 		}
-		
+
 	} else {
 
 		error_log( 'CHATLIO ERROR: The "github-updater.php" file could not be loaded. Auto updates are not working...' );
@@ -66,7 +66,7 @@ if ( is_admin() ) {
  */
 
 class Chatlio {
-	
+
 	/*
 	 * Starter defines and vars for use later
 	 *
@@ -77,7 +77,7 @@ class Chatlio {
     var $option_name = 'pwl_chatlio_options';
     var $options = array();
     var $option_defaults;
-    
+
     // DB version, for schema upgrades.
     var $db_version = 1;
 
@@ -91,7 +91,7 @@ class Chatlio {
      * @since 1.0
      */
     function __construct() {
-	    
+
 	    //allow this instance to be called from outside the class
         self::$instance = $this;
 
@@ -115,14 +115,14 @@ class Chatlio {
 
 	}
 
-	
+
 	/**
 	 * Frontend init Callback
 	 *
 	 * @since 1.0
 	 */
     function init() {
-	    
+
 	}
 
 	/**
@@ -131,29 +131,26 @@ class Chatlio {
 	 * @since 1.0
 	 */
     function wp_head() {
-	    
+
 	    // Get options
 	    $this->options = wp_parse_args( get_option( 'chatlio_options' ), $this->option_defaults );
-	    
+
 	    if ( isset ( $this->options['widget_id'] ) ) {
-		    
+
 		    $this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
-		    
+
 		    echo '<script type="text/javascript">
-					var _chatlio=_chatlio||[];
+					window._chatlio=window._chatlio||[];
 					!function(){
 						var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
-						for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
+						for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["configure","identify","track","show","hide","isShown","isOnline","init","reset","vsUuid","messages"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
 						var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];
-						n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","' . $this->options['widget_id'] . '"),n.setAttribute("data-embed-version","1.2"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
+						n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","' . $this->options['widget_id'] . '"),n.setAttribute("data-embed-version","2.0"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
 					}();
 				</script>';
-		    
 	    }
-	    
-	    
 	}
-	
+
 	/**
 	 * Admin init Callback
 	 *
@@ -163,7 +160,7 @@ class Chatlio {
 
         //Fetch and set up options.
 	    $this->options = wp_parse_args( get_option( 'chatlio_options' ), $this->option_defaults );
-		
+
 	    // Register Settings
 		$this::register_settings();
 	}
@@ -223,16 +220,16 @@ class Chatlio {
 	 *
 	 * @since 1.0
 	 */
-	
-	function chatlio_settings() { 
+
+	function chatlio_settings() {
 		?>
 
 		<div class="wrap">
-			
+
 		<h2><?php _e( 'Chatlio', 'chatlio' ); ?></h2>
-		
+
 		<form action="options.php" method="POST" >
-		    <?php 
+		    <?php
 			    settings_fields('chatlio');
 			    do_settings_sections( 'chatlio-settings' );
 			    submit_button();
@@ -250,7 +247,7 @@ class Chatlio {
 	 */
 	function chatlio_sanitize( $input ) {
     	$options = $this->options;
-    	
+
     	$input['db_version'] = $this->db_version;
 
     	foreach ($options as $key=>$value) {
