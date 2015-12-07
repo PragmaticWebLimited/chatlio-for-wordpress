@@ -2,7 +2,7 @@
 Contributors: jamesmorrison
 Tags: livechat, chatlio
 Requires at least: 4.2
-Tested up to: 4.2.2
+Tested up to: 4.3.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,4 +29,5 @@ These instructions assume you have already signed up for Chatlio and have gone t
 == Changelog ==
 
 = 1.0 =
-* README
+
+Initial release

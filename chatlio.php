@@ -4,7 +4,7 @@
 *	Plugin Name: Chatlio for WordPress
 *	Plugin URI: http://chatlio.pragmatic-web.co.uk/
 *	Description: Chatlio plugin for WordPress
-*	Version: 1.0.1
+*	Version: 1.0
 *	Author: James Morrison / Pragmatic Web
 *	Author URI: https://www.pragmatic-web.co.uk/
 **/
