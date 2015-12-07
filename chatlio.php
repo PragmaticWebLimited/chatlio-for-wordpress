@@ -1,13 +1,13 @@
 <?php
-	
+
 /**
- *	Plugin Name: Chatlio for WordPress
- *	Plugin URI: http://chatlio.pragmatic-web.co.uk/
- *	Description: Chatlio plugin for WordPress
- *	Version: 1.0.1
- *	Author: James Morrison / Pragmatic Web
- *	Author URI: https://www.pragmatic-web.co.uk/
- **/
+*	Plugin Name: Chatlio for WordPress
+*	Plugin URI: http://chatlio.pragmatic-web.co.uk/
+*	Description: Chatlio plugin for WordPress
+*	Version: 1.0.1
+*	Author: James Morrison / Pragmatic Web
+*	Author URI: https://www.pragmatic-web.co.uk/
+**/
 
 // Security check...
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,40 +16,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Chatlio class
- *
- * @since 1.0
- */
+* Chatlio class
+*
+* @since 1.0
+*/
 
 class Chatlio {
-	
+
 	/*
-	 * Starter defines and vars for use later
-	 *
-	 * @since 1.0
-	 */
+	* Starter defines and vars for use later
+	*
+	* @since 1.0
+	*/
 
 	// Holds option data.
-    var $option_name = 'pwl_chatlio_options';
-    var $options = array();
-    var $option_defaults;
-    
-    // DB version, for schema upgrades.
-    var $db_version = 1;
+	var $option_name = 'pwl_chatlio_options';
+	var $options = array();
+	var $option_defaults;
+
+	// DB version, for schema upgrades.
+	var $db_version = 1;
 
 	// Instance
 	static $instance;
 
-    /**
-     * Constuct
-     * Fires when class is constructed, adds init hook
-     *
-     * @since 1.0
-     */
-    function __construct() {
-	    
-	    //allow this instance to be called from outside the class
-        self::$instance = $this;
+	/**
+	* Constuct
+	* Fires when class is constructed, adds init hook
+	*
+	* @since 1.0
+	*/
+	function __construct() {
+
+		//allow this instance to be called from outside the class
+		self::$instance = $this;
 
 		//add frontend init hook
 		add_action( 'init', array( &$this, 'init' ) );
@@ -63,83 +63,82 @@ class Chatlio {
 		//add admin panel
 		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
 
-    	// Setting plugin defaults here:
+		// Setting plugin defaults here:
 		$this->option_defaults = array(
 			'widget_id' => '',
-	        'db_version' => $this->db_version,
-	    );
+			'db_version' => $this->db_version,
+		);
 
-	}
-
-	/**
-	 * Frontend init Callback
-	 *
-	 * @since 1.0
-	 */
-    function init() {
-	    
-	}
-
-	/**
-	 * Frontend wp_head Callback
-	 *
-	 * @since 1.0
-	 */
-    function wp_head() {
-	    
-	    // Get options
-	    $this->options = wp_parse_args( get_option( 'chatlio_options' ), $this->option_defaults );
-	    
-	    if ( isset ( $this->options['widget_id'] ) ) {
-		    
-		    $this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
-		    
-		    echo '<script type="text/javascript">
-					var _chatlio=_chatlio||[];
-					!function(){
-						var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
-						for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
-						var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];
-						n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","' . $this->options['widget_id'] . '"),n.setAttribute("data-embed-version","1.2"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
-					}();
-				</script>';
-		    
-	    }
-	    
-	    
 	}
 	
 	/**
-	 * Admin init Callback
-	 *
-	 * @since 1.0
-	 */
-    function admin_init() {
-
-        //Fetch and set up options.
-	    $this->options = wp_parse_args( get_option( 'chatlio_options' ), $this->option_defaults );
-		
-	    // Register Settings
-		$this::register_settings();
-	}
-
+	* Frontend init Callback
+	*
+	* @since 1.0
+	*/
+	function init() {}
+	
 	/**
-	 * Admin Menu Callback
-	 *
-	 * @since 1.0
-	 */
-    function admin_menu() {
+	* Frontend wp_head Callback
+	*
+	* @since 1.0
+	*/
+	function wp_head() {
+
+		// Get options
+		$this->options = wp_parse_args( get_option( 'chatlio_options' ), $this->option_defaults );
+
+		if ( isset ( $this->options['widget_id'] ) ) {
+
+		$this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
+
+		echo '<script type="text/javascript">
+		var _chatlio=_chatlio||[];
+		!function(){
+		var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
+		for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
+		var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];
+		n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","' . $this->options['widget_id'] . '"),n.setAttribute("data-embed-version","1.2"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
+		}();
+		</script>';
+
+		}
+	
+	
+	}
+	
+	/**
+	* Admin init Callback
+	*
+	* @since 1.0
+	*/
+	function admin_init() {
+
+		//Fetch and set up options.
+		$this->options = wp_parse_args( get_option( 'chatlio_options' ), $this->option_defaults );
+
+		// Register Settings
+		$this::register_settings();
+
+	}
+	
+	/**
+	* Admin Menu Callback
+	*
+	* @since 1.0
+	*/
+	function admin_menu() {
 		// Add settings page on Tools
 		add_management_page( __('Chatlio'), __('Chatlio'), 'manage_options', 'chatlio-settings', array( &$this, 'chatlio_settings' ) );
 	}
-
+	
 	/**
-	 * Register Admin Settings
-	 *
-	 * @since 1.0
-	 */
-    function register_settings() {
-	    register_setting( 'chatlio', 'chatlio_options', array( $this, 'chatlio_sanitize' ) );
+	* Register Admin Settings
+	*
+	* @since 1.0
+	*/
+	function register_settings() {
+		register_setting( 'chatlio', 'chatlio_options', array( $this, 'chatlio_sanitize' ) );
 
 		// The main section
 		add_settings_section( 'chatlio_settings_section', 'Chatlio Settings', array( &$this, 'chatlio_settings_callback'), 'chatlio-settings' );
@@ -147,25 +146,19 @@ class Chatlio {
 		// The Fields
 		add_settings_field( 'widget_id', 'Widget ID', array( &$this, 'widget_id_callback'), 'chatlio-settings', 'chatlio_settings_section' );
 	}
+	
+	/**
+	* Settings Callback
+	*
+	* @since 2.0
+	*/
+	function chatlio_settings_callback() {}
 
 	/**
-	 * Settings Callback
-	 *
-	 * @since 2.0
-	 */
-	function chatlio_settings_callback() {
-/*
-	    ?>
-	    <p><?php _e('Please enter your Widget ID to enable Chatlio:', 'chatlio'); ?></p>
-	    <?php
-*/
-	}
-
-	/**
-	 * Widget ID Statuses Callback
-	 *
-	 * @since 2.0
-	 */
+	* Widget ID Statuses Callback
+	*
+	* @since 2.0
+	*/
 	function widget_id_callback() {
 		?>
 		<input type="input" id="chatlio_options[widget_id]" name="chatlio_options[widget_id]" value="<?php echo ( $this->options['widget_id'] ); ?>" >
@@ -174,53 +167,52 @@ class Chatlio {
 	}
 
 	/**
-	 * Call settings page
-	 *
-	 * @since 1.0
-	 */
-	
+	* Call settings page
+	*
+	* @since 1.0
+	*/
+
 	function chatlio_settings() { 
-		?>
+	?>
 
 		<div class="wrap">
-			
+
 		<h2><?php _e( 'Chatlio', 'chatlio' ); ?></h2>
-		
+
 		<form action="options.php" method="POST" >
-		    <?php 
-			    settings_fields('chatlio');
-			    do_settings_sections( 'chatlio-settings' );
-			    submit_button();
-		    ?>
-		</form>
-		</div>
+			<?php 
+			settings_fields('chatlio');
+			do_settings_sections( 'chatlio-settings' );
+			submit_button();
+			?>
+			</form>
+			</div>
 		<?php
 	}
 
 	/**
-	 * Options sanitization and validation
-	 *
-	 * @param $input the input to be sanitized
-	 * @since 1.0
-	 */
+	* Options sanitization and validation
+	*
+	* @param $input the input to be sanitized
+	* @since 1.0
+	*/
 	function chatlio_sanitize( $input ) {
-    	$options = $this->options;
-    	
-    	$input['db_version'] = $this->db_version;
+		$options = $this->options;
 
-    	foreach ($options as $key=>$value) {
-            $output[$key] = sanitize_text_field($input[$key]);
-        }
+		$input['db_version'] = $this->db_version;
+
+		foreach ($options as $key=>$value) {
+			$output[$key] = sanitize_text_field($input[$key]);
+		}
 
 		return $output;
 	}
 
-
 	/**
-	 * Add settings link on plugin
-	 *
-	 * @since 1.0
-	 */
+	* Add settings link on plugin
+	*
+	* @since 1.0
+	*/
 	function add_settings_link( $links, $file ) {
 		if ( plugin_basename( __FILE__ ) == $file ) {
 			$settings_link = '<a href="' . admin_url( 'tools.php?page=chatlio-settings' ) .'">' . __( 'Settings', 'chatlio' ) . '</a>';
