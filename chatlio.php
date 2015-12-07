@@ -16,50 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Github Updater
- *
- * @since 1.0
- */
-
-if ( is_admin() ) {
-
-	if ( file_exists( plugin_dir_path( __FILE__ ) . '/github-updater.php' ) ) {
-
-		include_once( plugin_dir_path( __FILE__ ) . '/github-updater.php' );
-		
-		if ( class_exists( 'WP_GitHub_Updater' ) ) {
-			
-			new WP_GitHub_Updater( array(
-				'slug' => plugin_basename(__FILE__),
-				'proper_folder_name' => 'chatlio-for-wordpress',
-				'api_url' => 'https://api.github.com/repos/PragmaticWebLimited/chatlio-for-wordpress',
-				'raw_url' => 'https://raw.github.com/PragmaticWebLimited/chatlio-for-wordpress/master',
-				'github_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress',
-				'zip_url' => 'https://github.com/PragmaticWebLimited/chatlio-for-wordpress/archive/master.zip',
-				'sslverify' => true,
-				'requires' => '4.2',
-				'tested' => '4.2.2',
-				'readme' => 'version.md', // where the current version is stored. must be updated when a new release is tagged
-				'access_token' => '',
-			) );
-
-		} else {
-		
-			error_log( 'CHATLIO ERROR: The "WP_GitHub_Updater" class could not be loaded. Auto updates are not working...' );	
-			
-		}
-		
-	} else {
-
-		error_log( 'CHATLIO ERROR: The "github-updater.php" file could not be loaded. Auto updates are not working...' );
-
-	}
-
-}
-
-
-
-/**
  * Chatlio class
  *
  * @since 1.0
@@ -115,7 +71,6 @@ class Chatlio {
 
 	}
 
-	
 	/**
 	 * Frontend init Callback
 	 *
