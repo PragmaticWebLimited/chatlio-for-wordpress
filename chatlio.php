@@ -90,17 +90,18 @@ class Chatlio {
 
 		if ( isset ( $this->options['widget_id'] ) ) {
 
-		$this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
+			$this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
 
-		echo '<script type="text/javascript">
-		var _chatlio=_chatlio||[];
-		!function(){
-		var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
-		for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["identify","track","show","hide","isShown","isOnline"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
-		var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];
-		n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","' . $this->options['widget_id'] . '"),n.setAttribute("data-embed-version","1.2"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
-		}();
-		</script>';
+			echo '
+			<script type="text/javascript">
+			window._chatlio=window._chatlio||[];
+			!function(){
+				var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
+				for(var e=function(t){return function(){_chatlio.push([t].concat(arguments))}},i=["configure","identify","track","show","hide","isShown","isOnline","init","reset","vsUuid","messages"],a=0;a<i.length;a++)_chatlio[i[a]]||(_chatlio[i[a]]=e(i[a]));
+				var n=document.createElement("script"),c=document.getElementsByTagName("script")[0];
+				n.id="chatlio-widget-embed",n.async=!0,n.setAttribute("data-widget-id","' . $this->options['widget_id'] . '"),n.setAttribute("data-embed-version","2.0"),n.src="https://w.chatlio.com/w.chatlio-widget.js",c.parentNode.insertBefore(n,c)
+			}();
+			</script>';
 
 		}
 	
