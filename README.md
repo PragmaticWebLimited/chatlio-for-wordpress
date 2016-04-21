@@ -20,16 +20,20 @@ For more details, visit https://chatlio.com and talk to us!
 
 These instructions assume you have already signed up for Chatlio and have gone through the setup here https://chatlio.com/app/#/signup
 
-1. Click "Download ZIP" at top right of this page.
+1. Click "Download ZIP" at top right of this page
+
 ![](https://s3-us-west-2.amazonaws.com/static.chatlio.com/uploads/p8qvw4wqd4.png)
 
 2. In your wordpress admin, go to "Plugins -> Add new"
+
 ![](https://s3-us-west-2.amazonaws.com/static.chatlio.com/uploads/h7ga0p3o59.png)
 
 3. Activate the plugin through the 'Plugins' menu in WordPress
+
 ![](https://s3-us-west-2.amazonaws.com/static.chatlio.com/uploads/orr04ihcem.png)
 
 4. Add your widget ID through the 'Tools > Chatlio' menu in WordPress
+
 ![](https://s3-us-west-2.amazonaws.com/static.chatlio.com/uploads/hersc4epro.png)
 
 5. Check your wordpress home page, you should now have Chatlio widget installed.
