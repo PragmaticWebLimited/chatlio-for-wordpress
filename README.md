@@ -22,7 +22,7 @@ These instructions assume you have already signed up for Chatlio and have gone t
 
 #### 1. Click "Download ZIP" at top right of this page
 
-![](https://s3-us-west-2.amazonaws.com/static.chatlio.com/uploads/p8qvw4wqd4.png)
+![](https://s3-us-west-2.amazonaws.com/static.chatlio.com/uploads/byygdu5m6r.png)
 
 #### 2. In your wordpress admin, go to "Plugins -> Add new"
 
