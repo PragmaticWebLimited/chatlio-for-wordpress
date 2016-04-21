@@ -139,7 +139,7 @@ class Chatlio {
 
 		    $this->options['widget_id'] = esc_attr( $this->options['widget_id'] );
 
-		    echo '<script type="text/javascript">
+		    echo '<script data-cfasync="false" type="text/javascript">
 					window._chatlio=window._chatlio||[];
 					!function(){
 						var t=document.getElementById("chatlio-widget-embed");if(t&&window.React&&_chatlio.init)return void _chatlio.init(t,React);
