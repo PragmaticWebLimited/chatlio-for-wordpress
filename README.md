@@ -53,3 +53,7 @@ Corrected minor issues in README.md document
 ### 1.0
 
 Initial release
+
+### 1.1.0
+
+Update to Chatlio embed code
