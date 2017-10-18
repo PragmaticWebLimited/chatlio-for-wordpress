@@ -30,3 +30,6 @@ These instructions assume you have already signed up for Chatlio and have gone t
 
 = 1.0 =
 * README
+
+= 1.2 =
+* Updated Chatlio embed code
